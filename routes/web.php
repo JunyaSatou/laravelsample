@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 // http://laravelsample.test/hello のルーティング
 Route::get('hello', 'HelloController@index');
+
