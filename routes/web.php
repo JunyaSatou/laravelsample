@@ -11,11 +11,15 @@
 |
 */
 
+use App\Http\Middleware\HelloMiddleware;
+
 // http://laravelsample.test のルーティング
 Route::get('/', function () {
     return view('welcome');
 });
 
 // http://laravelsample.test/hello のルーティング
-Route::get('hello', 'HelloController@index');
+
+
+Route::get('hello', 'HelloController@index')->middleware(HelloMiddleware::class);
 
