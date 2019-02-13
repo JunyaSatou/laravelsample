@@ -5,31 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
 class HelloController extends Controller
 {
     public function index(Request $request){
-        // リクエストにidが設定されているときはidで検索する
-        if (isset($request->id)){
-            $param = ['id' => $request->id];
-            $items = DB::select('select * from people where id = :id', $param);
-        }
-        else{
-            $items = DB::select('select * from people');
-        }
+        $items = DB::table('people')->get();
         return view('hello.index', ['items' => $items]);
     }
 
     public function post(Request $request){
-        // リクエストにidが設定されているときはidで検索する
-        if (isset($request->id)) {
-            $param = ['id' => $request->id];
-            $items = DB::select('select * from people where id = :id', $param);
-        } else {
-            $items = DB::select('select * from people');
-        }
+        $items = DB::table('people')->get();
         return view('hello.index', ['items' => $items]);
     }
 
@@ -49,5 +37,49 @@ class HelloController extends Controller
                             values (:name, :mail, :age, :created_at, :updated_at)', $param);
         echo 'テスト';
         return redirect('/hello');
+    }
+
+    public function edit(Request $request){
+        $param = [
+            'id' => $request->id
+        ];
+        $item = DB::select('select * from people where id = :id', $param);
+        return view('hello.edit', ['form' => $item[0]]);
+    }
+
+    public function update(Request $request){
+        $param = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'mail' => $request->mail,
+            'age' => $request->age,
+            'updated_at' => date("Y-m-d H:i:s"),
+        ];
+
+        DB::update('update people set name = :name, mail = :mail, age = :age, updated_at = :updated_at
+                            where id = :id', $param);
+        return redirect('/hello');
+    }
+
+    public function del(Request $request){
+        $param = [
+            'id' => $request->id,
+        ];
+        $item = DB::select('select * from people where id = :id', $param);
+        return view('hello.del', ['form' => $item[0]]);
+    }
+
+    public function remove(Request $request){
+        $param = [
+            'id' => $request->id,
+        ];
+        DB::delete('delete from people where id = :id', $param);
+        return redirect('/hello');
+    }
+
+    public function show(Request $request){
+        $id = $request->id;
+        $items = DB::table('people')->where('id', '<=', $id)->get();
+        return view('hello.show', ['items' => $items]);
     }
 }
