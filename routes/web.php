@@ -21,3 +21,7 @@ Route::get('/', function () {
 // http://laravelsample.test/hello のルーティング
 Route::get('hello', 'HelloController@index');
 Route::post('hello', 'HelloController@post');
+
+// http://laravelsample.test/hello/add のルーティング
+Route::get('hello/add', 'HelloController@add');
+Route::post('hello/add', 'HelloController@create');
