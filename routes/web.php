@@ -34,5 +34,24 @@ Route::post('hello/edit', 'HelloController@update');
 Route::get('hello/del', 'HelloController@del');
 Route::post('hello/del', 'HelloController@remove');
 
-// http://laravelsample.test/hello/show?id=1 のルーティング
+// http://laravelsample.test/hello/show?name=hanako のルーティング
 Route::get('hello/show', 'HelloController@show');
+
+// http://laravelsample.test/person のルーティング
+Route::get('person', 'PersonController@index');
+
+// http://laravelsample.test/person/find のルーティング
+Route::get('person/find', 'PersonController@find');
+Route::post('person/find', 'PersonController@search');
+
+// http://laravelsample.test/person/add のルーティング
+Route::get('person/add', 'PersonController@add');
+Route::post('person/add', 'PersonController@create');
+
+// http://laravelsample.test/person/edit のルーティング
+Route::get('person/edit', 'PersonController@edit');
+Route::post('person/edit', 'PersonController@update');
+
+// http://laravelsample.test/person/del?id=1 のルーティング
+Route::get('person/del', 'PersonController@delete');
+Route::post('person/del', 'PersonController@remove');
