@@ -55,3 +55,18 @@ Route::post('person/edit', 'PersonController@update');
 // http://laravelsample.test/person/del?id=1 のルーティング
 Route::get('person/del', 'PersonController@delete');
 Route::post('person/del', 'PersonController@remove');
+
+// http://laravelsample.test/board のルーティング
+Route::get('board', 'BoardController@index');
+
+// http://laravelsample.test/board/add のルーティング
+Route::get('board/add', 'BoardController@add');
+Route::post('board/add', 'BoardController@create');
+
+// http://laravelsample.test/board/del のルーティング
+Route::get('board/del', 'BoardController@delete');
+Route::post('board/del', 'BoardController@remove');
+
+// http://laravelsample.test/board/edit?id=1 のルーティング
+Route::get('board/edit', 'BoardController@edit');
+Route::post('board/update', 'BoardController@update');
