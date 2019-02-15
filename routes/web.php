@@ -19,7 +19,8 @@ Route::get('/', function () {
 });
 
 // http://laravelsample.test/hello のルーティング
-Route::get('hello', 'HelloController@index');
+//Route::get('hello', 'HelloController@index');
+Route::get('hello', 'HelloController@index')->middleware('auth');
 Route::post('hello', 'HelloController@post');
 
 // http://laravelsample.test/hello/add のルーティング
@@ -76,3 +77,9 @@ Route::post('hello/session', 'HelloController@ses_put');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// http://laravelsample.test/hello/auth のルーティング
+Route::get('hello/auth', 'HelloController@getAuth');
+Route::post('hello/auth', 'HelloController@postAuth');
+
+Route::post('hello/logout', 'HelloController@logout');

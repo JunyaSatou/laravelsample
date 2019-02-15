@@ -16,7 +16,8 @@ class HelloController extends Controller
     public function index(Request $request){
         $user = Auth::user();
         $sort = $request->sort;
-        $items = Person::orderBy($sort, 'asc')->paginate(5);
+//        $items = Person::orderBy($sort, 'asc')->paginate(5);
+        $items = DB::table('people')->paginate(5);
         $param = [
             'items' => $items,
             'sort' => $sort,
@@ -107,5 +108,30 @@ class HelloController extends Controller
         $msg = $request->input;
         $request->session()->put('msg', $msg);
         return redirect('hello/session');
+    }
+
+    public function getAuth(Request $request){
+        $param = [
+            'message' => 'ログインしてください。'
+        ];
+        return view('hello.auth', $param);
+    }
+
+    public function postAuth(Request $request){
+        $email = $request->email;
+        $password = $request->password;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $msg = 'ログインしました。 ' . Auth::user()->name . ')';
+        }
+        else{
+            $msg = 'ログインに失敗しました。';
+        }
+
+        return view('hello.auth', ['message' => $msg]);
+    }
+
+    public function logout(Request $request){
+
     }
 }
