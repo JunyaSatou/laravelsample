@@ -9,13 +9,17 @@
 
 @section('content')
     <table>
-        <tr><th>Data</th></tr>
+        <tr><th>Message</th><th>Name</th></tr>
         @foreach ($items as $item)
             <tr>
-                <td>{{$item->getData()}}</td>
+                <td>{{$item->message}}</td>
+                <td>{{$item->person->name}}</td>
             </tr>
         @endforeach
     </table>
+    <form action="/board/add" method="get">
+        <input type="submit" value="続けて登録する">
+    </form>
 @endsection
 
 @section('footer')

@@ -8,8 +8,14 @@ use App\Person;
 class PersonController extends Controller
 {
     public function index(Request $request){
-        $items = Person::all();
-        return view('person.index', ['items' => $items]);
+//        $items = Person::all();
+        // boardsテーブルにデータを持っている人を抽出
+        $hasItems = Person::has('boards')->get();
+        // boardsテーブルにデータを持っていない人を抽出
+        $noItems = Person::doesntHave('boards')->get();
+
+        $param = ['hasItems' => $hasItems, 'noItems' => $noItems];
+        return view('person.index', $param);
     }
 
     public function find(Request $request){

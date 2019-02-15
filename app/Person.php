@@ -36,4 +36,16 @@ class Person extends Model{
 
         static::addGlobalScope(new ScopePerson);
     }
+
+    // 1対1の関係
+    // 親モデルがPersonクラス。子モデルがBoardクラス。
+    // よって、PersonクラスのidとBoardクラスのperson_idがデフォルトで紐づけされる
+    public function board(){
+        return $this->hasOne('App\Board');
+    }
+
+    // 1対多の関係
+    public function boards(){
+        return $this->hasMany('App\Board');
+    }
 }

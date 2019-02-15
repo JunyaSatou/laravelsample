@@ -63,10 +63,12 @@ Route::get('board', 'BoardController@index');
 Route::get('board/add', 'BoardController@add');
 Route::post('board/add', 'BoardController@create');
 
-// http://laravelsample.test/board/del のルーティング
-Route::get('board/del', 'BoardController@delete');
-Route::post('board/del', 'BoardController@remove');
+// http://laravelsample.test/rest のルーティング
+Route::resource('rest', 'RestappController');
 
-// http://laravelsample.test/board/edit?id=1 のルーティング
-Route::get('board/edit', 'BoardController@edit');
-Route::post('board/update', 'BoardController@update');
+// http://laravelsample.test/hello/rest のルーティング
+Route::get('hello/rest', 'HelloController@rest');
+
+// http://laravelsample.test/hello/session のルーティング
+Route::get('hello/session', 'HelloController@ses_get');
+Route::post('hello/session', 'HelloController@ses_put');

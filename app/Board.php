@@ -16,6 +16,17 @@ class Board extends Model{
     ];
 
     public function getData(){
-        return $this->id . ': ' . $this->title;
+        $result = $this->id . ': ' . $this->title;
+
+        // this->personが存在するときのみ、出力結果にthis->person->nameを結合する。
+        if($this->person != null){
+            $result = $result . ' (' . $this->person->name . ')';
+        }
+
+        return $result;
+    }
+
+    public function person(){
+        return $this->belongsTo('App\Person');
     }
 }

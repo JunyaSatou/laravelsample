@@ -8,7 +8,7 @@ use App\Board;
 class BoardController extends Controller
 {
     public function index(Request $request){
-        $items = Board::all();
+        $items = Board::with('person')->get();
         return view('board.index', ['items' => $items]);
     }
 
