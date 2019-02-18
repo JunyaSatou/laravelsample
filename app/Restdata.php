@@ -15,7 +15,11 @@ class Restdata extends Model{
         'url' => 'required',
     );
 
-    // restdataテーブルから取得したデータを文字列に加工する。
+    /**
+     * restdataテーブルから取得したデータを文字列に加工する。
+     *
+     * @return string
+     */
     public function getData(){
         return $this->id . ':' . $this->message . '(' . $this->url . ')';
     }

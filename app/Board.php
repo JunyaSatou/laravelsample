@@ -26,6 +26,11 @@ class Board extends Model{
         return $result;
     }
 
+    /**
+     * 従クラスから、主クラスを参照する
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function person(){
         return $this->belongsTo('App\Person');
     }
